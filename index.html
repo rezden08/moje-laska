@@ -1,5 +1,3 @@
-# Adjusting code to handle singular/plural form of "day" and adding option for music and photos
-final_with_plural_correction_and_media = """
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -106,16 +104,3 @@ final_with_plural_correction_and_media = """
   </script>
 </body>
 </html>
-"""
-
-# Save corrected version with music and photo placeholders
-file_path = "/mnt/data/index_with_media.html"
-with open(file_path, "w", encoding="utf-8") as file:
-    file.write(final_with_plural_correction_and_media)
-
-# Zip the file for download
-zip_file_with_media = "/mnt/data/miluju-te-web-with-media.zip"
-with ZipFile(zip_file_with_media, "w") as zipf:
-    zipf.write(file_path, arcname="index.html")
-
-zip_file_with_media
