@@ -97,10 +97,10 @@
       const fullWeeks = Math.floor(daysAfterMonths / 7);
       const remainingDays = daysAfterMonths % 7;
 
-      const dayString = remainingDays === 1 ? "den" : "dní";
+      const dayString = remainingDays === 1 ? "den" : "dny";
 
       document.getElementById("time").innerText =
-        `${fullMonths} měsíců, ${fullWeeks} týdnů a ${remainingDays} ${dayString} ❤️`;
+        `${fullMonths} měsíce, ${fullWeeks} týdny a ${remainingDays} ${dayString} ❤️`;
     }
 
     updateTimeTogether();
