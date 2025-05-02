@@ -3,7 +3,7 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
-  <title>Jak dlouho tě miluji 💕❤️</title>
+  <title>Jak dlouho jsme spolu ❤️</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -16,8 +16,31 @@
       color: #ff4d4d;
     }
     #time {
-      font-size: 2em;
+      font-size: 1.8em;
       margin-top: 20px;
+    }
+    .heart {
+      font-size: 8em;
+      color: #ff4d4d;
+      margin: 30px 0 10px;
+      position: relative;
+    }
+    .initials {
+      font-size: 2em;
+      color: white;
+      position: absolute;
+      top: 38%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .date-message {
+      font-size: 1.5em;
+      color: #ff1a1a;
+      margin-top: 10px;
+    }
+    .heart-wrapper {
+      position: relative;
+      display: inline-block;
     }
   </style>
 </head>
@@ -25,21 +48,27 @@
   <h1>Jsme spolu už:</h1>
   <div id="time"></div>
 
+  <div class="heart-wrapper">
+    <div class="heart">❤️</div>
+    <div class="initials">D & N</div>
+  </div>
+
+  <div class="date-message">8. 2. 2025 – Forever ❤️</div>
+
   <script>
-    // Nastav datum, kdy jste spolu začali:
-    const startDate = new Date("2025-02-08"); // Změň na vaše datum
+    // Datum kdy jste se potkali
+    const startDate = new Date("2025-02-08T00:00:00");
 
     function updateTimeTogether() {
       const now = new Date();
       const diff = now - startDate;
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const years = Math.floor(days / 365);
-      const months = Math.floor((days % 365) / 30);
-      const remainingDays = days - years * 365 - months * 30;
+      const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const totalWeeks = Math.floor(totalDays / 7);
+      const months = Math.floor(totalDays / 30.4375); // průměrný počet dní v měsíci
 
       document.getElementById("time").innerText =
-        `${years} let, ${months} měsíců a ${remainingDays} dní ❤️`;
+        `${months} měsíců, ${totalWeeks} týdnů a ${totalDays} dní ❤️`;
     }
 
     updateTimeTogether();
