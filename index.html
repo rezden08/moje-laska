@@ -1,3 +1,5 @@
+# Adjusting code to handle singular/plural form of "day" and adding option for music and photos
+final_with_plural_correction_and_media = """
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -43,6 +45,17 @@
       position: relative;
       display: inline-block;
     }
+    #music-player {
+      margin-top: 30px;
+    }
+    #photo-gallery {
+      margin-top: 20px;
+    }
+    #photo-gallery img {
+      width: 200px;
+      margin: 10px;
+      border-radius: 10px;
+    }
   </style>
 </head>
 <body>
@@ -56,6 +69,19 @@
 
   <div class="date-message">8. 2. 2025 – Forever ❤️</div>
 
+  <div id="music-player">
+    <audio controls>
+      <source src="YOUR-MUSIC-FILE.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <div id="photo-gallery">
+    <img src="YOUR-PHOTO-1.jpg" alt="photo1">
+    <img src="YOUR-PHOTO-2.jpg" alt="photo2">
+    <img src="YOUR-PHOTO-3.jpg" alt="photo3">
+  </div>
+
   <script>
     const startDate = new Date("2025-02-08T00:00:00");
 
@@ -64,17 +90,32 @@
       const diff = now - startDate;
       const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
 
-      const fullMonths = Math.floor(totalDays / 30.4375);
+      const fullMonths = Math.floor(totalDays / 30.4375); // average days in a month
       const daysAfterMonths = totalDays - Math.floor(fullMonths * 30.4375);
       const fullWeeks = Math.floor(daysAfterMonths / 7);
       const remainingDays = daysAfterMonths % 7;
 
+      const dayString = remainingDays === 1 ? "den" : "dní";
+
       document.getElementById("time").innerText =
-        `${fullMonths} měsíce, ${fullWeeks} týdny a ${remainingDays} dní ❤️`;
+        `${fullMonths} měsíců, ${fullWeeks} týdnů a ${remainingDays} ${dayString} ❤️`;
     }
 
     updateTimeTogether();
-    setInterval(updateTimeTogether, 1000 * 60 * 60);
+    setInterval(updateTimeTogether, 1000 * 60 * 60); // update every hour
   </script>
 </body>
 </html>
+"""
+
+# Save corrected version with music and photo placeholders
+file_path = "/mnt/data/index_with_media.html"
+with open(file_path, "w", encoding="utf-8") as file:
+    file.write(final_with_plural_correction_and_media)
+
+# Zip the file for download
+zip_file_with_media = "/mnt/data/miluju-te-web-with-media.zip"
+with ZipFile(zip_file_with_media, "w") as zipf:
+    zipf.write(file_path, arcname="index.html")
+
+zip_file_with_media
