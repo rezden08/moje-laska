@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Jak dlouho jsme spolu ❤️</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffe6e6;
+      color: #333;
+      text-align: center;
+      padding-top: 50px;
+    }
+    h1 {
+      color: #ff4d4d;
+    }
+    #time {
+      font-size: 2em;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Jsme spolu už:</h1>
+  <div id="time"></div>
+
+  <script>
+    // Nastav datum, kdy jste spolu začali:
+    const startDate = new Date("2023-07-15"); // Změň na vaše datum
+
+    function updateTimeTogether() {
+      const now = new Date();
+      const diff = now - startDate;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const years = Math.floor(days / 365);
+      const months = Math.floor((days % 365) / 30);
+      const remainingDays = days - years * 365 - months * 30;
+
+      document.getElementById("time").innerText =
+        `${years} let, ${months} měsíců a ${remainingDays} dní ❤️`;
+    }
+
+    updateTimeTogether();
+    setInterval(updateTimeTogether, 1000 * 60 * 60); // aktualizace každou hodinu
+  </script>
+</body>
+</html>
