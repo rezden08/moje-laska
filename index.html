@@ -85,6 +85,42 @@
   </div>
 
   <script>
+  const startDate = new Date("2025-02-08T00:00:00");
+
+  // Funkce pro správné skloňování v češtině
+  function getCzechPluralForm(number, singular, few, many) {
+    if (number === 1) {
+      return singular;
+    } else if (number >= 2 && number <= 4) {
+      return few;
+    } else {
+      return many;
+    }
+  }
+
+  function updateTimeTogether() {
+    const now = new Date();
+    const diff = now - startDate;
+    const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+    const fullMonths = Math.floor(totalDays / 30.4375); // average days in a month
+    const daysAfterMonths = totalDays - Math.floor(fullMonths * 30.4375);
+    const fullWeeks = Math.floor(daysAfterMonths / 7);
+    const remainingDays = daysAfterMonths % 7;
+
+    // Použití funkce pro skloňování
+    const monthString = getCzechPluralForm(fullMonths, "měsíc", "měsíce", "měsíců");
+    const weekString = getCzechPluralForm(fullWeeks, "týden", "týdny", "týdnů");
+    const dayString = getCzechPluralForm(remainingDays, "den", "dny", "dní");
+
+    document.getElementById("time").innerText =
+      `${fullMonths} ${monthString}, ${fullWeeks} ${weekString} a ${remainingDays} ${dayString} ❤️`;
+  }
+
+  updateTimeTogether();
+  setInterval(updateTimeTogether, 1000 * 60 * 60 * 24); // update every 24 hours (one day)
+</script>
+  <script>
     const startDate = new Date("2025-02-08T00:00:00");
 
     function updateTimeTogether() {
