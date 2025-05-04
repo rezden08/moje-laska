@@ -68,12 +68,10 @@
   <div class="date-message">8. 2. 2025 – Forever ❤️</div>
 
   <div id="music-player">
-    <!-- Audio elements for random sounds -->
-    <audio id="sound1" src="i love you.mp3"></audio>
-    <audio id="sound2" src="sound2.mp3"></audio>
-    <audio id="sound3" src="sound3.mp3"></audio>
-    <audio id="sound4" src="sound4.mp3"></audio>
-    <audio id="sound5" src="sound5.mp3"></audio>
+    <audio controls>
+      <source src="i love you.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
   </div>
 
   <div id="photo-gallery">
@@ -87,44 +85,26 @@
     <img src="photo8.jpg" alt="photo8">
     <img src="photo9.jpg" alt="photo9">
     <img src="photo10.jpg" alt="photo10">
-    <img src="photo11.jpg" alt="photo11">
+    <img src="photo.11.jpg" alt="photo11">
     <img src="photo12.jpg" alt="photo12">
     <img src="photo13.jpg" alt="photo13">
     <img src="photo14.jpg" alt="photo14">
   </div>
 
   <script>
-    // Array of sound elements
-    const sounds = [
-      document.getElementById('sound1'),
-      document.getElementById('sound2'),
-      document.getElementById('sound3'),
-      document.getElementById('sound4'),
-      document.getElementById('sound5')
-    ];
-
-    // Function to play a random sound
-    function playRandomSound() {
-      // Stop any currently playing sounds
-      sounds.forEach(sound => sound.pause());
-
-      // Pick a random sound
-      const randomIndex = Math.floor(Math.random() * sounds.length);
-      const selectedSound = sounds[randomIndex];
-
-      // Reset and play the selected sound
-      selectedSound.currentTime = 0;
-      selectedSound.play();
-    }
-
-    // Attach event listener to the body
-    document.body.addEventListener('click', playRandomSound);
-  </script>
-
-  <script>
     const startDate = new Date("2025-02-08T00:00:00");
 
-    // Function to update the time together
+    // Funkce pro správné skloňování v češtině
+    function getCzechPluralForm(number, singular, few, many) {
+      if (number === 1) {
+        return singular;
+      } else if (number >= 2 && number <= 4) {
+        return few;
+      } else {
+        return many;
+      }
+    }
+
     function updateTimeTogether() {
       const now = new Date();
       const diff = now - startDate;
@@ -135,17 +115,17 @@
       const fullWeeks = Math.floor(daysAfterMonths / 7);
       const remainingDays = daysAfterMonths % 7;
 
-      // Czech pluralization
-      const monthString = fullMonths === 1 ? "měsíc" : "měsíce";
-      const weekString = fullWeeks === 1 ? "týden" : "týdny";
-      const dayString = remainingDays === 1 ? "den" : "dny";
+      // Použití funkce pro skloňování
+      const monthString = getCzechPluralForm(fullMonths, "měsíc", "měsíce", "měsíců");
+      const weekString = getCzechPluralForm(fullWeeks, "týden", "týdny", "týdnů");
+      const dayString = getCzechPluralForm(remainingDays, "den", "dny", "dní");
 
       document.getElementById("time").innerText =
         `${fullMonths} ${monthString}, ${fullWeeks} ${weekString} a ${remainingDays} ${dayString} ❤️`;
     }
 
     updateTimeTogether();
-    setInterval(updateTimeTogether, 1000 * 60 * 60 * 24); // update every 24 hours
+    setInterval(updateTimeTogether, 1000 * 60 * 60 * 24); // update every 24 hours (one day)
   </script>
 </body>
 </html>
